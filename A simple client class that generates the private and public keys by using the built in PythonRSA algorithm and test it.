@@ -137,3 +137,49 @@ if digest.startswith(prefix):
 print ("after " + str(i) + " iterations found nonce: "+ digest)
 return digest
 mine ("test message", 2)
+
+
+
+1f) Add blocks to the miner and dump the blockchain
+Code:
+last_transaction_index = 0
+block = Block()
+for i in range(3):
+temp_transaction = transactions[last_transaction_index]
+# validate transaction
+# if valid
+block.verified_transactions.append (temp_transaction)
+last_transaction_index += 1
+block.previous_block_hash = last_block_hash
+block.Nonce = mine (block, 2)
+digest = hash (block)
+TPCoins.append (block)
+last_block_hash = digest
+# Miner 2 adds a block
+block = Block()
+for i in range(3):
+temp_transaction = transactions[last_transaction_index]
+# validate transaction
+# if valid
+block.verified_transactions.append (temp_transaction)
+last_transaction_index += 1
+block.previous_block_hash = last_block_hash
+block.Nonce = mine (block, 2)
+digest = hash (block)
+TPCoins.append (block)
+last_block_hash = digest
+# Miner 3 adds a block
+block = Block()
+for i in range(3):
+temp_transaction = transactions[last_transaction_index]
+#display_transaction (temp_transaction)
+# validate transaction
+# if valid
+block.verified_transactions.append (temp_transaction)
+last_transaction_index += 1
+block.previous_block_hash = last_block_hash
+block.Nonce = mine (block, 2)
+digest = hash (block)
+TPCoins.append (block)
+last_block_hash = digest
+dump_blockchain(TPCoins)
