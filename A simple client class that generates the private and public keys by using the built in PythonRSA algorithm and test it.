@@ -30,7 +30,6 @@ print (Dinesh.identity)
 
 
 1b) A transaction class to send and receive money and test it. Code:
-
 class Transaction:
 def init (self, sender, recipient, value):
 self.sender = sender
@@ -89,6 +88,8 @@ for transaction in transactions:
 display_transaction (transaction)
 print (' ')
 
+
+
 1d) Create a blockchain, a genesis block and execute it. Code:
 class Block:
 def init (self):
@@ -120,3 +121,19 @@ print (' ')
 print ('=====================================')
 TPCoins.append (block0)
 dump_blockchain(TPCoins)
+
+
+
+
+1e) Create a mining function and test it. Code:
+def sha256(message):
+return hashlib.sha256(message.encode('ascii')).hexdigest()
+def mine(message, difficulty=1):
+assert difficulty >= 1
+prefix = '1' * difficulty
+for i in range(1000):
+digest = sha256(str(hash(message)) + str(i))
+if digest.startswith(prefix):
+print ("after " + str(i) + " iterations found nonce: "+ digest)
+return digest
+mine ("test message", 2)
